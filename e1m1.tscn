@@ -131,17 +131,9 @@ volumetric_fog_detail_spread = 1.66435
 [node name="map" type="Node3D"]
 
 [node name="TBLoader" type="TBLoader" parent="."]
-_import_path = NodePath("")
-unique_name_in_owner = false
-process_mode = 0
-process_priority = 0
-process_physics_priority = 0
-process_thread_group = 0
-editor_description = ""
 map_resource = "res://maps/main maps/newyork"
 map_inverse_scale = 32
 texture_path = "res://textures/"
-script = null
 
 [node name="Default Layer" type="Node3D" parent="TBLoader"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0.025, -1.81875)

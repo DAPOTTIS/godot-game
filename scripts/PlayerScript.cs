@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Godot;
 
 namespace Anotherfailedattempt.scripts;
@@ -10,7 +11,7 @@ public partial class PlayerScript : CharacterBody3D
 	private bool _isCrouching;
 	private double _primShootTimerCounter;
 	private double _secondShootTimerCounter;
-	
+	private List<Weapon3D> _weapons = new List<Weapon3D>();
 	
 	
 	[Export] private float _gravity = 12f;
@@ -55,6 +56,17 @@ public partial class PlayerScript : CharacterBody3D
 		_meleeSlot = GetNode<Node3D>("InactiveWeapon/melee");
 		_projectileSlot = GetNode<Node3D>("InactiveWeapon/projectile");
 	}
+
+	private void InitWeapons()
+	{
+		//@todo: get amount of current inactive weapons and add them to list
+	}
+	
+	private void AddNewWeapon(Weapon3D newWeapon)
+	{
+		_weapons.Add(newWeapon);
+	}
+	
 	public override void _UnhandledInput(InputEvent @inputEvent)
 	{
 		if (@inputEvent.IsActionPressed("ui_cancel"))
@@ -77,12 +89,9 @@ public partial class PlayerScript : CharacterBody3D
 
 		if (@event is InputEventKey keyEvent && keyEvent.Pressed)
 		{
-			Node3D inactiveWeapon; //= new Node3D();
 			switch (keyEvent.Keycode)
 			{
 				case Key.Key1:
-					inactiveWeapon = _inactiveWeapons.GetChildOrNull<Node3D>(0);
-					WeaponSwitch(inactiveWeapon);
 					break;
 			}
 		}
@@ -101,7 +110,7 @@ public partial class PlayerScript : CharacterBody3D
 		}
 		SetDir();
 	}
-	
+
 	private void Jump()
 	{
 		if (!IsOnFloor()) return;
@@ -158,26 +167,15 @@ public partial class PlayerScript : CharacterBody3D
 			return _secondShootTimerCounter > timer;
 	}
 
-	private void WeaponSwitch(Node3D inactiveWeapon)
+	private void WeaponSwitch()
 	{
-		var inactiveweapon = inactiveWeapon.GetChildOrNull<Weapon3D>(0);
-		GD.Print(inactiveweapon);
-		_currentWeapon = _currentWeaponSlot.GetChildOrNull<Weapon3D>(0);
-			
-		//GD.Print(GetNode<Weapon3D>("InactiveWeapon/sword").GetInstanceId());
-		//GD.Print(inactiveweapon);
-		_currentWeaponSlot.RemoveChild(_currentWeapon);
-		_inactiveWeapons.RemoveChild(inactiveweapon);
-			
-		_currentWeaponSlot.AddChild(inactiveweapon);
-		_inactiveWeapons.AddChild(_currentWeapon);
-		_currentWeapon = _currentWeaponSlot.GetChildOrNull<Weapon3D>(0);
+		
 	}
 	//Movement methods
-	void Accelerate(float accel, float movespeed)
+	void Accelerate(float accel, float moveSpeed)
 	{
 		//acceleration calculated based on desired speed and the dot product of current velocity and wishdir
-		float wishSpeed = QNormalize(_wishDir) * movespeed;
+		float wishSpeed = QNormalize(_wishDir) * moveSpeed;
 		float currentSpeed = _velocity.Dot(_wishDir);
 		
 		float addSpeed = wishSpeed - currentSpeed;
