@@ -1,0 +1,17 @@
+[gd_scene load_steps=5 format=3 uid="uid://b8l5t2ox76fd4"]
+
+[ext_resource type="PackedScene" uid="uid://5dcfxagjfgdq" path="res://models/weapons/PGameSwordDraft.gltf" id="1_nglyu"]
+[ext_resource type="Shader" path="res://shaders/viewmodel.gdshader" id="2_mikny"]
+[ext_resource type="Texture2D" uid="uid://18m3qwfkvc1p" path="res://models/weapons/PGameSwordDraft_ColorMapLowRes.png" id="3_f0bfi"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b0pwn"]
+render_priority = 0
+shader = ExtResource("2_mikny")
+shader_parameter/fov = 60.0
+shader_parameter/angle = null
+shader_parameter/albedo = ExtResource("3_f0bfi")
+
+[node name="PGameSwordDraft" instance=ExtResource("1_nglyu")]
+
+[node name="Torus002" parent="." index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_b0pwn")

@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://dekko04ygb18q"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_543xp"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_bl66n"]
+size = Vector3(0.45, 0.45, 0.45)
+
+[node name="AmmoBox" type="RigidBody3D"]
+collision_layer = 0
+mass = 0.34
+gravity_scale = 0.0
+continuous_cd = true
+max_contacts_reported = 2
+contact_monitor = true
+freeze = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 0, 0, 0)
+shape = SubResource("BoxShape3D_543xp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_bl66n")

@@ -1,0 +1,14 @@
+[remap]
+
+importer="qodot.map"
+type="Resource"
+uid="uid://cwl0x6ajedegd"
+path="res://.godot/imported/B_BOMB.MAP-0b76a47bc3c6d2eebbeb775396804685.tres"
+
+[deps]
+
+source_file="res://maps/B_BOMB.MAP"
+dest_files=["res://.godot/imported/B_BOMB.MAP-0b76a47bc3c6d2eebbeb775396804685.tres"]
+
+[params]
+

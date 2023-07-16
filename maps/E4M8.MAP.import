@@ -1,0 +1,14 @@
+[remap]
+
+importer="qodot.map"
+type="Resource"
+uid="uid://bh1l4lxu8tvbk"
+path="res://.godot/imported/E4M8.MAP-c5bf95991fea6760d4cdfe639b6a0f71.tres"
+
+[deps]
+
+source_file="res://maps/E4M8.MAP"
+dest_files=["res://.godot/imported/E4M8.MAP-c5bf95991fea6760d4cdfe639b6a0f71.tres"]
+
+[params]
+

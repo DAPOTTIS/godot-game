@@ -1,0 +1,14 @@
+[remap]
+
+importer="qodot.map"
+type="Resource"
+uid="uid://bsh12cmsegd53"
+path="res://.godot/imported/ad_zendar.map-76b2e5707b610bb27dac25ecd8ba13ea.tres"
+
+[deps]
+
+source_file="res://maps/arcane dimensions/ad_zendar.map"
+dest_files=["res://.godot/imported/ad_zendar.map-76b2e5707b610bb27dac25ecd8ba13ea.tres"]
+
+[params]
+

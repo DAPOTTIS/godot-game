@@ -1,0 +1,32 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="PackedScene" uid="uid://bxdywmqkrk4rb" path="res://models/weapons/headass.gltf" id="1_g5hbl"]
+
+[node name="headass" instance=ExtResource("1_g5hbl")]
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/0/position = Vector3(-1.59162e-14, 0.701918, -0.121882)
+bones/1/rotation = Quaternion(-0.192865, -8.14655e-14, -4.59827e-08, 0.981225)
+bones/2/rotation = Quaternion(-0.0732351, -1.18889e-07, -8.7303e-09, 0.997315)
+bones/3/position = Vector3(-4.15872e-14, 0.365664, 0.0151412)
+bones/5/position = Vector3(-0.103943, 0.21111, -0.0515531)
+bones/5/rotation = Quaternion(0.021447, 0.732005, 0.680952, -0.00357833)
+bones/6/rotation = Quaternion(-0.0167472, 0.00459103, 0.110306, 0.993746)
+bones/7/rotation = Quaternion(-0.00693673, 0.0164599, -0.183934, 0.982776)
+bones/8/rotation = Quaternion(1.87064e-05, -8.2158e-06, 0.0711831, 0.997463)
+bones/10/rotation = Quaternion(0.460162, -0.349251, 0.36325, 0.730975)
+bones/11/rotation = Quaternion(-0.311136, -0.412644, -0.774855, -0.364031)
+bones/12/rotation = Quaternion(0.150614, -0.0600841, -0.303402, 0.938964)
+bones/15/rotation = Quaternion(0.284285, 0.209088, -0.534684, 0.767839)
+bones/16/rotation = Quaternion(0.597619, -0.246718, -0.662669, 0.377956)
+bones/18/rotation = Quaternion(-0.0144476, 0.00294422, -0.199661, 0.979754)
+bones/20/rotation = Quaternion(0.662669, -0.377957, -0.597619, 0.246718)
+bones/22/rotation = Quaternion(0.0144474, -0.00294442, -0.199661, 0.979754)
+
+[node name="Cube" parent="Armature/Skeleton3D" index="0"]
+transform = Transform3D(1, -2.16005e-12, -2.23821e-13, 2.07478e-12, 0.999871, -0.0160778, 2.66454e-13, 0.0160778, 0.999871, 4.15884e-06, 1.31768, -0.038593)
+bone_idx = 4
+
+[node name="Cube004" parent="Armature/Skeleton3D" index="1"]
+transform = Transform3D(0.00109826, -0.999927, -0.0120515, -0.00593335, -0.0120578, 0.99991, -0.999982, -0.00102666, -0.00594618, -0.0358142, 1.20462, 0.476195)
+bone_idx = 9

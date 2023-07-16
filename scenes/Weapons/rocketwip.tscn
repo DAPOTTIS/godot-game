@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3]
+
+[ext_resource type="PackedScene" uid="uid://dkujkx1v77nyv" path="res://fonts/Roboto-Black.ttf" id="1_ebk2r"]
+
+[node name="Rocketwip" instance=ExtResource("1_ebk2r")]
+
+[node name="AnimationPlayer" parent="." index="1"]
+autoplay = "Loop"

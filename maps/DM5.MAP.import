@@ -1,0 +1,14 @@
+[remap]
+
+importer="qodot.map"
+type="Resource"
+uid="uid://cxlwko2lp6nmr"
+path="res://.godot/imported/DM5.MAP-d3489b578a8e474d463503d06447938c.tres"
+
+[deps]
+
+source_file="res://maps/DM5.MAP"
+dest_files=["res://.godot/imported/DM5.MAP-d3489b578a8e474d463503d06447938c.tres"]
+
+[params]
+

@@ -1,0 +1,14 @@
+[remap]
+
+importer="qodot.map"
+type="Resource"
+uid="uid://chvuwp1s80vfr"
+path="res://.godot/imported/ad_magna.map-8ff9f12d682d9da902dabfc495190bf6.tres"
+
+[deps]
+
+source_file="res://maps/arcane dimensions/ad_magna.map"
+dest_files=["res://.godot/imported/ad_magna.map-8ff9f12d682d9da902dabfc495190bf6.tres"]
+
+[params]
+

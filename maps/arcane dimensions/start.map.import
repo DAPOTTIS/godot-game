@@ -1,0 +1,14 @@
+[remap]
+
+importer="qodot.map"
+type="Resource"
+uid="uid://b238eo5nx18nk"
+path="res://.godot/imported/start.map-fecb357dddedc0351f9c3187a2be1bfc.tres"
+
+[deps]
+
+source_file="res://maps/arcane dimensions/start.map"
+dest_files=["res://.godot/imported/start.map-fecb357dddedc0351f9c3187a2be1bfc.tres"]
+
+[params]
+

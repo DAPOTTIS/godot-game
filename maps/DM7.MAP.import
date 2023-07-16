@@ -1,0 +1,14 @@
+[remap]
+
+importer="qodot.map"
+type="Resource"
+uid="uid://0ihlnj3cj483"
+path="res://.godot/imported/DM7.MAP-9e404bb05d50e1b3da0cfbc009762af7.tres"
+
+[deps]
+
+source_file="res://maps/DM7.MAP"
+dest_files=["res://.godot/imported/DM7.MAP-9e404bb05d50e1b3da0cfbc009762af7.tres"]
+
+[params]
+

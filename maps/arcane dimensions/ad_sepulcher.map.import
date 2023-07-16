@@ -1,0 +1,14 @@
+[remap]
+
+importer="qodot.map"
+type="Resource"
+uid="uid://cwv2hgpu48hsr"
+path="res://.godot/imported/ad_sepulcher.map-a6cfb2fd9ab8b66759d0f4ebb6133f19.tres"
+
+[deps]
+
+source_file="res://maps/arcane dimensions/ad_sepulcher.map"
+dest_files=["res://.godot/imported/ad_sepulcher.map-a6cfb2fd9ab8b66759d0f4ebb6133f19.tres"]
+
+[params]
+

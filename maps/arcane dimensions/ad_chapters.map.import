@@ -1,0 +1,14 @@
+[remap]
+
+importer="qodot.map"
+type="Resource"
+uid="uid://db1qwitbvdr8o"
+path="res://.godot/imported/ad_chapters.map-70a4da88be728003995d54c628767c5b.tres"
+
+[deps]
+
+source_file="res://maps/arcane dimensions/ad_chapters.map"
+dest_files=["res://.godot/imported/ad_chapters.map-70a4da88be728003995d54c628767c5b.tres"]
+
+[params]
+

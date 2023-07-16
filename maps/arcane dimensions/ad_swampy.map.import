@@ -1,0 +1,14 @@
+[remap]
+
+importer="qodot.map"
+type="Resource"
+uid="uid://by18w30lm70hc"
+path="res://.godot/imported/ad_swampy.map-427f8db136af985656e373ad3448b4d4.tres"
+
+[deps]
+
+source_file="res://maps/arcane dimensions/ad_swampy.map"
+dest_files=["res://.godot/imported/ad_swampy.map-427f8db136af985656e373ad3448b4d4.tres"]
+
+[params]
+

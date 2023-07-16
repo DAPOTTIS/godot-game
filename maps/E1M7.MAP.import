@@ -1,0 +1,14 @@
+[remap]
+
+importer="qodot.map"
+type="Resource"
+uid="uid://behtmepow4208"
+path="res://.godot/imported/E1M7.MAP-1a695573e9e2e43d0b90871dbd7872ea.tres"
+
+[deps]
+
+source_file="res://maps/E1M7.MAP"
+dest_files=["res://.godot/imported/E1M7.MAP-1a695573e9e2e43d0b90871dbd7872ea.tres"]
+
+[params]
+

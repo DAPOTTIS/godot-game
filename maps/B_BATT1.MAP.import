@@ -1,0 +1,14 @@
+[remap]
+
+importer="qodot.map"
+type="Resource"
+uid="uid://dfc8qcbv2svof"
+path="res://.godot/imported/B_BATT1.MAP-9bc5eddb5933e163392c91f7a8348b75.tres"
+
+[deps]
+
+source_file="res://maps/B_BATT1.MAP"
+dest_files=["res://.godot/imported/B_BATT1.MAP-9bc5eddb5933e163392c91f7a8348b75.tres"]
+
+[params]
+

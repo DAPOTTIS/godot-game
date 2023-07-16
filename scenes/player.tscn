@@ -1,0 +1,68 @@
+[gd_scene load_steps=8 format=3 uid="uid://dgfy4odkvksok"]
+
+[ext_resource type="Script" path="res://scripts/PlayerScript.cs" id="1_b6bmh"]
+[ext_resource type="PackedScene" uid="uid://bldrv3pv6p0gv" path="res://scenes/UserInterface.tscn" id="2_6ad3f"]
+[ext_resource type="PackedScene" uid="uid://bay0xp0rqsqgc" path="res://scenes/Weapons/rocketlauncher.tscn" id="3_yp2xl"]
+[ext_resource type="PackedScene" uid="uid://bxyrthv1cb28y" path="res://models/weapons/sword.tscn" id="4_ws87r"]
+[ext_resource type="AudioStream" uid="uid://blftrsykf7e2p" path="res://sounds/mercenary_jump01.wav" id="4_wt8ya"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_e3nca"]
+height = 1.8
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ey3wc"]
+size = Vector3(1.061, 1.8, 1.073)
+
+[node name="Player" type="CharacterBody3D"]
+floor_snap_length = 0.15
+safe_margin = 0.01
+script = ExtResource("1_b6bmh")
+_groundDecel = 8.0
+_friction = 5.0
+_airAccel = 15.0
+
+[node name="PlayerCollision" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_e3nca")
+
+[node name="UserInterface" parent="." instance=ExtResource("2_6ad3f")]
+pivot_offset = Vector2(-113, -155)
+
+[node name="Head" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.819421, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Head"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.384396, 0)
+fov = 90.0
+near = 0.001
+
+[node name="Weapon" type="Node3D" parent="Head/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.485, 0)
+
+[node name="InactiveWeapon" type="Node3D" parent="."]
+visible = false
+
+[node name="melee" type="Node3D" parent="InactiveWeapon"]
+
+[node name="sword" parent="InactiveWeapon/melee" instance=ExtResource("4_ws87r")]
+transform = Transform3D(0.510321, -0.857183, -0.0693483, 0.850361, 0.514997, -0.107999, 0.128289, -0.00385692, 0.991729, 0.148, -0.25695, -1.276)
+
+[node name="projectile" type="Node3D" parent="InactiveWeapon"]
+
+[node name="rocketlauncher" parent="InactiveWeapon/projectile" instance=ExtResource("3_yp2xl")]
+transform = Transform3D(-4.34876e-08, 4.41731e-09, 1, 0.101056, 0.994881, 0, -0.994881, 0.101056, -4.37114e-08, 0, -0.16695, -2.74488)
+collision_layer = 0
+collision_mask = 0
+
+[node name="CanStand" type="RayCast3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.736096, 0)
+target_position = Vector3(0, 2, 0)
+collide_with_areas = true
+
+[node name="JumpSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_wt8ya")
+volume_db = -10.78
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="BoundingBox" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("BoxShape3D_ey3wc")
+disabled = true

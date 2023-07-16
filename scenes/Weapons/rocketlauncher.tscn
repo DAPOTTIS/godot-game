@@ -1,0 +1,37 @@
+[gd_scene load_steps=7 format=3 uid="uid://bay0xp0rqsqgc"]
+
+[ext_resource type="Script" path="res://scenes/Weapons/rocketlauncher.cs" id="1_6aaab"]
+[ext_resource type="PackedScene" uid="uid://dyq34s4px3b1" path="res://scenes/Weapons/Projectile.tscn" id="2_5upcu"]
+[ext_resource type="AudioStream" uid="uid://c6sgphyvp8enp" path="res://sounds/ShootGun.ogg" id="4_fd8fp"]
+[ext_resource type="PackedScene" uid="uid://kpie1aygre8f" path="res://models/weapons/pottisnadelauncher_draft_13444.tscn" id="8_misvs"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oqw55"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wkp1y"]
+size = Vector3(1, 0.3, 0.3)
+
+[node name="weapon" type="RigidBody3D"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+gravity_scale = 0.0
+freeze = true
+script = ExtResource("1_6aaab")
+_projectileScene = ExtResource("2_5upcu")
+MaxPool = 22
+
+[node name="Tip" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.24, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Tip"]
+transform = Transform3D(0.061, 0, 0, 0, 0.061, 0, 0, 0, 0.061, -0.0186188, 0, 0)
+shape = SubResource("BoxShape3D_oqw55")
+disabled = true
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.255, 0, 0)
+shape = SubResource("BoxShape3D_wkp1y")
+
+[node name="Model" parent="." instance=ExtResource("8_misvs")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="FireSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_fd8fp")

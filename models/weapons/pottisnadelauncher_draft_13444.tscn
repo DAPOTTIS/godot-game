@@ -1,0 +1,79 @@
+[gd_scene load_steps=11 format=3 uid="uid://c143y2tt8ndqd"]
+
+[ext_resource type="PackedScene" uid="uid://cjy7hltbcuxkp" path="res://models/weapons/PottisnadelauncherDraft13444.gltf" id="1_icgxi"]
+[ext_resource type="Shader" path="res://shaders/viewmodel.gdshader" id="2_87opk"]
+[ext_resource type="Texture2D" uid="uid://o5hxctkutt0t" path="res://models/weapons/Home1.png" id="3_1w22f"]
+[ext_resource type="FontFile" uid="uid://dkujkx1v77nyv" path="res://fonts/Roboto-Black.ttf" id="4_j5nlg"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m0g4j"]
+render_priority = 0
+shader = ExtResource("2_87opk")
+shader_parameter/fov = 60.0
+shader_parameter/angle = null
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vpfvq"]
+render_priority = 0
+shader = ExtResource("2_87opk")
+shader_parameter/fov = 60.0
+shader_parameter/angle = 0.0
+shader_parameter/albedo = ExtResource("3_1w22f")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8xg3d"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_rqc5y"]
+viewport_path = NodePath("AmmoViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jxqgd"]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_8xg3d")
+shader = ExtResource("2_87opk")
+shader_parameter/fov = 60.0
+shader_parameter/angle = 3.14
+shader_parameter/albedo = SubResource("ViewportTexture_rqc5y")
+
+[sub_resource type="Theme" id="Theme_upm8t"]
+default_base_scale = 0.81
+default_font = ExtResource("4_j5nlg")
+default_font_size = 128
+
+[node name="PottisnadelauncherDraft13444" instance=ExtResource("1_icgxi")]
+
+[node name="Rocket" parent="Armature/Skeleton3D" index="0"]
+bone_idx = 2
+
+[node name="Rocket" parent="Armature/Skeleton3D/Rocket" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_m0g4j")
+
+[node name="DaGun001" parent="Armature/Skeleton3D" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.72529e-08)
+bone_idx = 4
+
+[node name="DaGun001" parent="Armature/Skeleton3D/DaGun001" index="0"]
+material_override = SubResource("ShaderMaterial_vpfvq")
+
+[node name="DaGun" parent="Armature/Skeleton3D" index="2"]
+bone_idx = 5
+
+[node name="DaGun" parent="Armature/Skeleton3D/DaGun" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_vpfvq")
+surface_material_override/1 = SubResource("ShaderMaterial_jxqgd")
+
+[node name="AmmoViewport" type="SubViewport" parent="." index="2"]
+transparent_bg = true
+size = Vector2i(256, 256)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="AmmoViewport" index="0"]
+
+[node name="AmmoCounter" type="Label" parent="AmmoViewport/CanvasLayer" index="0"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_upm8t")
+text = "123"
+horizontal_alignment = 1
+vertical_alignment = 1

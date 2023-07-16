@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=3 uid="uid://chmfheceyqcx5"]
+
+[ext_resource type="Script" path="res://scripts/Weapons/projectile.cs" id="1_vjbwu"]
+[ext_resource type="PackedScene" uid="uid://buinxvra6xmul" path="res://scenes/Weapons/rocketwip.tscn" id="2_nma6m"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fuuug"]
+height = 1.5
+
+[node name="Projectile" type="RigidBody3D"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+top_level = true
+collision_layer = 0
+mass = 3.14
+inertia = Vector3(1, 1, 1)
+max_contacts_reported = 10
+contact_monitor = true
+script = ExtResource("1_vjbwu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.3, 0, 0, 0, -0.00153412, 0.299996, 0, -0.299996, -0.00153412, 0, 0, 0)
+shape = SubResource("CapsuleShape3D_fuuug")
+
+[node name="ExplodeTimer" type="Timer" parent="."]
+wait_time = 2.169
+one_shot = true
+autostart = true
+
+[node name="Rocketwip2" parent="." instance=ExtResource("2_nma6m")]
+transform = Transform3D(0.08, 0, 0, 0, 0.08, 0, 0, 0, 0.08, 0, 0, 0)
+
+[connection signal="body_entered" from="." to="." method="OnBodyEntered"]
+[connection signal="timeout" from="ExplodeTimer" to="." method="_on_timer_timeout"]

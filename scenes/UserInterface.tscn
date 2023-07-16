@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://bldrv3pv6p0gv"]
+
+[ext_resource type="Script" path="res://scripts/UI/UserInterface.cs" id="1_damgq"]
+
+[sub_resource type="Theme" id="Theme_ek2wb"]
+
+[node name="UserInterface" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_damgq")
+
+[node name="DirectionLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1064.0
+offset_top = 616.0
+offset_right = 1154.0
+offset_bottom = 646.0
+theme = SubResource("Theme_ek2wb")
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+
+[node name="SpeedLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 1064.0
+offset_top = 584.0
+offset_right = 1154.0
+offset_bottom = 614.0
+theme = SubResource("Theme_ek2wb")
+theme_override_colors/font_color = Color(1, 1, 1, 1)

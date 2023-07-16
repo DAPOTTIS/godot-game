@@ -1,0 +1,14 @@
+[remap]
+
+importer="qodot.map"
+type="Resource"
+uid="uid://diags27s4dkrv"
+path="res://.godot/imported/e2m10.map-636777bfd524bbffbaedc1676946354f.tres"
+
+[deps]
+
+source_file="res://maps/e2m10.map"
+dest_files=["res://.godot/imported/e2m10.map-636777bfd524bbffbaedc1676946354f.tres"]
+
+[params]
+

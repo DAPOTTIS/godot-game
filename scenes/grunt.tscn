@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://do2rk5bsps7ak"]
+
+[ext_resource type="PackedScene" uid="uid://bxdywmqkrk4rb" path="res://models/weapons/headass.gltf" id="1_ws41r"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3xguu"]
+size = Vector3(1.28139, 1.47056, 1)
+
+[node name="Grunt" type="CharacterBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.726688, 0)
+shape = SubResource("BoxShape3D_3xguu")
+
+[node name="headass" parent="." instance=ExtResource("1_ws41r")]
