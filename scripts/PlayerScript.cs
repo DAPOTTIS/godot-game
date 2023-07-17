@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Godot;
+using Godot.Collections;
 
 namespace Anotherfailedattempt.scripts;
 
@@ -11,9 +12,9 @@ public partial class PlayerScript : CharacterBody3D
 	private bool _isCrouching;
 	private double _primShootTimerCounter;
 	private double _secondShootTimerCounter;
-	private List<Weapon3D> _weapons = new List<Weapon3D>();
-	
-	
+	private List<Weapon3D> _weapons = new();
+	private Array<Weapon3D> _projectileWeapons = new();
+
 	[Export] private float _gravity = 12f;
 	[Export] private float _groundAccel = 10f;
 	[Export] private float _groundDecel = 10f;
@@ -35,7 +36,8 @@ public partial class PlayerScript : CharacterBody3D
 	private Weapon3D _currentWeapon;
 	private Node3D _meleeSlot;
 	private Node3D _projectileSlot;
-	
+	private Weapon3D _rocketLauncher;
+
 	enum CanShootCheck
 	{
 		Primary, Secondary
@@ -55,11 +57,14 @@ public partial class PlayerScript : CharacterBody3D
 		_inactiveWeapons = GetNode<Node3D>("InactiveWeapon");
 		_meleeSlot = GetNode<Node3D>("InactiveWeapon/melee");
 		_projectileSlot = GetNode<Node3D>("InactiveWeapon/projectile");
+		_rocketLauncher = GetNode<Weapon3D>("InactiveWeapon/rocketlauncher");
+		InitWeapons();
 	}
 
 	private void InitWeapons()
 	{
-		//@todo: get amount of current inactive weapons and add them to list
+		//@todo: get amount of current inactive weapons and add them to list, new idea maybe use jaggedarray?
+		_projectileWeapons.Add(_rocketLauncher);
 	}
 	
 	private void AddNewWeapon(Weapon3D newWeapon)
@@ -167,9 +172,20 @@ public partial class PlayerScript : CharacterBody3D
 			return _secondShootTimerCounter > timer;
 	}
 
-	private void WeaponSwitch()
+	private void SwitchWeaponTo(Weapon3D weapon)
 	{
-		
+		//var inactiveweapon = inactiveWeapon.GetChildOrNull<Weapon3D>(0);
+		//GD.Print(inactiveweapon);
+		_currentWeapon = _currentWeaponSlot.GetChildOrNull<Weapon3D>(0);
+
+		//GD.Print(GetNode<Weapon3D>("InactiveWeapon/sword").GetInstanceId());
+		//GD.Print(inactiveweapon);
+		_currentWeaponSlot.RemoveChild(_currentWeapon);
+		//_inactiveWeapons.RemoveChild(inactiveweapon);
+
+		//_currentWeaponSlot.AddChild(inactiveweapon);
+		_inactiveWeapons.AddChild(_currentWeapon);
+		_currentWeapon = _currentWeaponSlot.GetChildOrNull<Weapon3D>(0);
 	}
 	//Movement methods
 	void Accelerate(float accel, float moveSpeed)
