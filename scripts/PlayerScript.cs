@@ -13,25 +13,24 @@ public partial class PlayerScript : CharacterBody3D
 	private double _primShootTimerCounter;
 	private double _secondShootTimerCounter;
 	private List<Weapon3D> _weapons = new();
-	private Array<Weapon3D> _projectileWeapons = new();
 
-	[Export] private float _gravity = 12f;
-	[Export] private float _groundAccel = 10f;
-	[Export] private float _groundDecel = 10f;
-	[Export] private float _groundMoveSpeed = 8.0f;
-	[Export] private float _airMoveSpeed = 1f;
-	[Export] private float _jumpVelocity = 4.5f;
-	[Export] private float _friction = 6f;
-	[Export] private float _airAccel = 1f;
-	[Export] private float _camSens = 0.006f;
+	[Export] private float _gravity = 12F;
+	[Export] private float _groundAccel = 10F;
+	[Export] private float _groundDecel = 10F;
+	[Export] private float _groundMoveSpeed = 8.0F;
+	[Export] private float _airMoveSpeed = 1F;
+	[Export] private float _jumpVelocity = 4.5F;
+	[Export] private float _friction = 6F;
+	[Export] private float _airAccel = 1F;
+	[Export] private float _camSens = 0.006F;
 	
 	private Node3D _head;
+	private Node3D _weaponSlot;
 	private Camera3D _camera;
 	private CollisionShape3D _playerCollision;
 	private CapsuleShape3D _collShape;
 	private RayCast3D _canStand;
 	private AudioStreamPlayer _jumpSound;
-	private Node3D _weaponSlot;
 	private Weapon3D _currentWeapon;
 
 	enum CanShootCheck
@@ -53,12 +52,13 @@ public partial class PlayerScript : CharacterBody3D
 	}
 	
 	
-	public override void _UnhandledInput(InputEvent @inputEvent)
+	public override void _UnhandledInput(InputEvent inputEvent)
 	{
-		if (@inputEvent.IsActionPressed("ui_cancel"))
-		{
+		if (inputEvent.IsActionPressed("ui_cancel")) 
 			Input.MouseMode = Input.MouseModeEnum.Visible;
-		}
+		
+		//test
+		//Input.MouseMode = inputEvent.IsActionPressed("ui_cancel") ? Input.MouseModeEnum.Visible : Input.MouseModeEnum.Captured;
 	}
 
 	public override void _Input(InputEvent @event)
@@ -72,6 +72,7 @@ public partial class PlayerScript : CharacterBody3D
 			cameraRot.X = Mathf.Clamp(_camera.Rotation.X, Mathf.DegToRad(-80), Mathf.DegToRad(80f));
 			_camera.Rotation = cameraRot;
 		}
+		
 		if (@event is InputEventKey keyEvent)
 		{
 			switch (keyEvent.Keycode)
@@ -84,20 +85,23 @@ public partial class PlayerScript : CharacterBody3D
 					break;
 			}
 		}
+		
 		//Crouching is munted so ill do it later
 		//_isCrouching = Input.IsActionPressed("crouch");
 		
 		if (@event.IsActionPressed("primaryfire") && _currentWeapon.CurrentAmmo>0 && CanShoot(_currentWeapon.PrimShootTimer, CanShootCheck.Primary))
 		{
-			_currentWeapon._PrimaryFire();
+			_currentWeapon.PrimaryFire();
 			_primShootTimerCounter = 0f;
 			_currentWeapon.FireSound.Play();
 		}
+		
 		if (@event.IsActionPressed("secondaryfire") && _currentWeapon.CurrentAmmo>0 && CanShoot(_currentWeapon.SecShootTimer,CanShootCheck.Secondary))
 		{
-			_currentWeapon._SecondaryFire();
+			_currentWeapon.SecondaryFire();
 			_secondShootTimerCounter = 0f;
 		}
+		
 		SetDir();
 	}
 
@@ -111,18 +115,16 @@ public partial class PlayerScript : CharacterBody3D
 	public override void _PhysicsProcess(double delta)
 	{
 		_velocity = Velocity;
-		if (IsOnFloor())
-		{
+		if (IsOnFloor()) 
 			GroundMove();
-		}
-		else
-		{
+		
+		else 
 			AirMove();
-		}
+		
 		if (Input.IsActionPressed("jump"))
-		{
 			Jump();
-		}
+		
+		
 		//tried to do auto stair climbing, but sadly godot doesnt seem to support detecting separate faces
 		//like what i saw in PhysX docs
 		//
@@ -157,27 +159,30 @@ public partial class PlayerScript : CharacterBody3D
 	{
 		if (mode == CanShootCheck.Primary)
 			return _primShootTimerCounter > timer;
-		else
-			return _secondShootTimerCounter > timer;
+		return _secondShootTimerCounter > timer;
 	}
+	
 	private void InitWeapons()
 	{
 		for (int i = 0; i < _weaponSlot.GetChildCount(); i++)
 		{
-			var WeaponChild = _weaponSlot.GetChildOrNull<Weapon3D>(i);
-			_weapons.Add(WeaponChild);
+			var weaponChild = _weaponSlot.GetChildOrNull<Weapon3D>(i);
+			_weapons.Add(weaponChild);
 		}
 		//temporary hack, sets sword as current weapon when player loads in
+		
 		SetWeapon(_weapons[0]);
 	}
 
 	private void SetWeapon(Weapon3D weapon)
 	{
 		//iterates through stored weapons to set them as invisible, then sets current weapon as visible
+		
 		for (int i = 0; i < _weapons.Count; i++)
 		{
 			_weapons[i].Visible = false;
 		}
+		
 		_currentWeapon = weapon;
 		_currentWeapon.Visible = true;
 	}
@@ -216,17 +221,14 @@ public partial class PlayerScript : CharacterBody3D
 		
 		var control = lastSpeed < _groundDecel ? _groundDecel : lastSpeed;
 		var drop = control * _friction * (float)GetPhysicsProcessDeltaTime();
-		
 		var newSpeed = lastSpeed - drop;
+		
 		if (newSpeed < 0)
-		{
 			newSpeed = 0;
-		}
 
 		if (lastSpeed > 0)
-		{
 			newSpeed /= lastSpeed;
-		}
+
 		_velocity.X *= newSpeed;
 		_velocity.Z *= newSpeed;
 	}

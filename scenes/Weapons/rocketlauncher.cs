@@ -39,7 +39,7 @@ public partial class rocketlauncher : Weapon3D
 		PlayerVelocity = _player.Velocity;
 	}
 
-	public override void _PrimaryFire()
+	public override void PrimaryFire()
 	{
 		FiredAmmo = 1;
 		var projectile = (RigidBody3D)_projectileScene.Instantiate();
@@ -50,7 +50,7 @@ public partial class rocketlauncher : Weapon3D
 		_animPlayer.Play("Shoot");
 		projectile.TopLevel = true;
 	}
-	public override void _SecondaryFire()
+	public override void SecondaryFire()
 	{
 		FiredAmmo = 1;
 		//@todo: Secondary firing stuff

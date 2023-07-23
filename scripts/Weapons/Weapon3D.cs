@@ -58,12 +58,12 @@ public partial class Weapon3D : RigidBody3D
 		
 	}
 
-	public virtual void _PrimaryFire()
+	public virtual void PrimaryFire()
 	{
 		
 	}
 
-	public virtual void _SecondaryFire()
+	public virtual void SecondaryFire()
 	{
 		
 	}
