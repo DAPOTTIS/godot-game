@@ -37,16 +37,16 @@ near = 0.001
 [node name="Weapon" type="Node3D" parent="Head/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.485, 0)
 
-[node name="InactiveWeapon" type="Node3D" parent="."]
-visible = false
+[node name="sword" parent="Head/Camera3D/Weapon" instance=ExtResource("4_ws87r")]
+transform = Transform3D(0.510321, -0.857183, -0.0693483, 0.850361, 0.514997, -0.107999, 0.128289, -0.00385692, 0.991729, 0.148, -0.206975, -1.276)
 
-[node name="sword" parent="InactiveWeapon" instance=ExtResource("4_ws87r")]
-transform = Transform3D(0.510321, -0.857183, -0.0693483, 0.850361, 0.514997, -0.107999, 0.128289, -0.00385692, 0.991729, 0.148, -0.25695, -1.276)
-
-[node name="rocketlauncher" parent="InactiveWeapon" instance=ExtResource("3_yp2xl")]
-transform = Transform3D(-4.34876e-08, 4.41731e-09, 1, 0.101056, 0.994881, 0, -0.994881, 0.101056, -4.37114e-08, 0, -0.16695, -2.74488)
+[node name="rocketlauncher" parent="Head/Camera3D/Weapon" instance=ExtResource("3_yp2xl")]
+transform = Transform3D(-4.34876e-08, 4.41731e-09, 1, 0.101056, 0.994881, 0, -0.994881, 0.101056, -4.37114e-08, 0, -0.116975, -2.74488)
 collision_layer = 0
 collision_mask = 0
+
+[node name="InactiveWeapon" type="Node3D" parent="."]
+visible = false
 
 [node name="CanStand" type="RayCast3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.736096, 0)

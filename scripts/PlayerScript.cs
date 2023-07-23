@@ -31,7 +31,7 @@ public partial class PlayerScript : CharacterBody3D
 	private CapsuleShape3D _collShape;
 	private RayCast3D _canStand;
 	private AudioStreamPlayer _jumpSound;
-	private Node3D _currentWeaponSlot;
+	private Node3D _weaponSlot;
 	private Node3D _inactiveWeapons;
 	private Weapon3D _currentWeapon;
 	private Node3D _meleeSlot;
@@ -52,19 +52,33 @@ public partial class PlayerScript : CharacterBody3D
 		_playerCollision = GetNode<CollisionShape3D>("PlayerCollision");
 		_collShape = (CapsuleShape3D)_playerCollision.Shape;
 		_canStand = GetNode<RayCast3D>("CanStand");
-		_currentWeaponSlot = GetNode<Node3D>("Head/Camera3D/Weapon");
+		_weaponSlot = GetNode<Node3D>("Head/Camera3D/Weapon");
 		_jumpSound = GetNode<AudioStreamPlayer>("JumpSound");
 		_inactiveWeapons = GetNode<Node3D>("InactiveWeapon");
-		_meleeSlot = GetNode<Node3D>("InactiveWeapon/melee");
-		_projectileSlot = GetNode<Node3D>("InactiveWeapon/projectile");
+		//_meleeSlot = GetNode<Node3D>("InactiveWeapon/melee");
+		//_projectileSlot = GetNode<Node3D>("InactiveWeapon/projectile");
 		_rocketLauncher = GetNode<Weapon3D>("InactiveWeapon/rocketlauncher");
 		InitWeapons();
 	}
 
 	private void InitWeapons()
 	{
-		//@todo: get amount of current inactive weapons and add them to list, new idea maybe use jaggedarray?
-		_projectileWeapons.Add(_rocketLauncher);
+		for (int i = 0; i < _weaponSlot.GetChildCount(); i++)
+		{
+			var WeaponChild = _weaponSlot.GetChildOrNull<Weapon3D>(i);
+			_weapons.Add(WeaponChild);
+		}
+		SetWeapon(_weapons[0]);
+	}
+
+	private void SetWeapon(Weapon3D weapon)
+	{
+		for (int i = 0; i < _weaponSlot.GetChildCount(); i++)
+		{
+			_weaponSlot.GetChild<Weapon3D>(i).Visible = false;
+		}
+		_currentWeapon = weapon;
+		_currentWeapon.Visible = true;
 	}
 	
 	private void AddNewWeapon(Weapon3D newWeapon)
@@ -97,6 +111,10 @@ public partial class PlayerScript : CharacterBody3D
 			switch (keyEvent.Keycode)
 			{
 				case Key.Key1:
+					SetWeapon(_weapons[0]);
+					break;
+				case Key.Key2:
+					SetWeapon(_weapons[1]);
 					break;
 			}
 		}
@@ -176,16 +194,16 @@ public partial class PlayerScript : CharacterBody3D
 	{
 		//var inactiveweapon = inactiveWeapon.GetChildOrNull<Weapon3D>(0);
 		//GD.Print(inactiveweapon);
-		_currentWeapon = _currentWeaponSlot.GetChildOrNull<Weapon3D>(0);
+		_currentWeapon = _weaponSlot.GetChildOrNull<Weapon3D>(0);
 
 		//GD.Print(GetNode<Weapon3D>("InactiveWeapon/sword").GetInstanceId());
 		//GD.Print(inactiveweapon);
-		_currentWeaponSlot.RemoveChild(_currentWeapon);
+		_weaponSlot.RemoveChild(_currentWeapon);
 		//_inactiveWeapons.RemoveChild(inactiveweapon);
 
 		//_currentWeaponSlot.AddChild(inactiveweapon);
 		_inactiveWeapons.AddChild(_currentWeapon);
-		_currentWeapon = _currentWeaponSlot.GetChildOrNull<Weapon3D>(0);
+		_currentWeapon = _weaponSlot.GetChildOrNull<Weapon3D>(0);
 	}
 	//Movement methods
 	void Accelerate(float accel, float moveSpeed)

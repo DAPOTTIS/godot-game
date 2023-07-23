@@ -48,6 +48,7 @@ public partial class rocketlauncher : Weapon3D
 		CurrentAmmo -= FiredAmmo;
 		_ammoCounter.Text = $"{CurrentAmmo}";
 		_animPlayer.Play("Shoot");
+		projectile.TopLevel = true;
 	}
 	public override void _SecondaryFire()
 	{
