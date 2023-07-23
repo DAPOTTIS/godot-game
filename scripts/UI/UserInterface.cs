@@ -16,8 +16,7 @@ public partial class UserInterface : Control
 		_speedLabel = GetNode<Label>("SpeedLabel");
 		//_rocketLauncher = _player.GetNode<Weapon3D>("Head/Camera3D/Weapon/rocketlauncher");
 	}
-
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
+	
 	public override void _Process(double delta)
 	{
 		//_velocityLabel.Text = $"{_rocketLauncher.CurrentAmmo} / {_rocketLauncher.MaxPool}";

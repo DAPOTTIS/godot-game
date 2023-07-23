@@ -53,7 +53,7 @@ public partial class rocketlauncher : Weapon3D
 	public override void _SecondaryFire()
 	{
 		FiredAmmo = 1;
-		//TODO: Secondary firing stuff
+		//@todo: Secondary firing stuff
 		//var projectile = (RigidBody3D)_projectileScene.Instantiate();
 		//projectile.ApplyImpulse(_tip.GlobalTransform.Basis.X * _projectileForce);
 		//_tip.AddChild(projectile);

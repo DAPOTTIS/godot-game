@@ -32,18 +32,13 @@ public partial class PlayerScript : CharacterBody3D
 	private RayCast3D _canStand;
 	private AudioStreamPlayer _jumpSound;
 	private Node3D _weaponSlot;
-	private Node3D _inactiveWeapons;
 	private Weapon3D _currentWeapon;
-	private Node3D _meleeSlot;
-	private Node3D _projectileSlot;
-	private Weapon3D _rocketLauncher;
 
 	enum CanShootCheck
 	{
 		Primary, Secondary
 	}
 	
-	//Override methods
 	public override void _Ready()
 	{
 		Input.MouseMode = Input.MouseModeEnum.Captured;
@@ -54,37 +49,9 @@ public partial class PlayerScript : CharacterBody3D
 		_canStand = GetNode<RayCast3D>("CanStand");
 		_weaponSlot = GetNode<Node3D>("Head/Camera3D/Weapon");
 		_jumpSound = GetNode<AudioStreamPlayer>("JumpSound");
-		_inactiveWeapons = GetNode<Node3D>("InactiveWeapon");
-		//_meleeSlot = GetNode<Node3D>("InactiveWeapon/melee");
-		//_projectileSlot = GetNode<Node3D>("InactiveWeapon/projectile");
-		_rocketLauncher = GetNode<Weapon3D>("InactiveWeapon/rocketlauncher");
 		InitWeapons();
 	}
-
-	private void InitWeapons()
-	{
-		for (int i = 0; i < _weaponSlot.GetChildCount(); i++)
-		{
-			var WeaponChild = _weaponSlot.GetChildOrNull<Weapon3D>(i);
-			_weapons.Add(WeaponChild);
-		}
-		SetWeapon(_weapons[0]);
-	}
-
-	private void SetWeapon(Weapon3D weapon)
-	{
-		for (int i = 0; i < _weaponSlot.GetChildCount(); i++)
-		{
-			_weaponSlot.GetChild<Weapon3D>(i).Visible = false;
-		}
-		_currentWeapon = weapon;
-		_currentWeapon.Visible = true;
-	}
 	
-	private void AddNewWeapon(Weapon3D newWeapon)
-	{
-		_weapons.Add(newWeapon);
-	}
 	
 	public override void _UnhandledInput(InputEvent @inputEvent)
 	{
@@ -105,8 +72,7 @@ public partial class PlayerScript : CharacterBody3D
 			cameraRot.X = Mathf.Clamp(_camera.Rotation.X, Mathf.DegToRad(-80), Mathf.DegToRad(80f));
 			_camera.Rotation = cameraRot;
 		}
-
-		if (@event is InputEventKey keyEvent && keyEvent.Pressed)
+		if (@event is InputEventKey keyEvent)
 		{
 			switch (keyEvent.Keycode)
 			{
@@ -118,6 +84,7 @@ public partial class PlayerScript : CharacterBody3D
 					break;
 			}
 		}
+		//Crouching is munted so ill do it later
 		//_isCrouching = Input.IsActionPressed("crouch");
 		
 		if (@event.IsActionPressed("primaryfire") && _currentWeapon.CurrentAmmo>0 && CanShoot(_currentWeapon.PrimShootTimer, CanShootCheck.Primary))
@@ -156,7 +123,9 @@ public partial class PlayerScript : CharacterBody3D
 		{
 			Jump();
 		}
-		
+		//tried to do auto stair climbing, but sadly godot doesnt seem to support detecting separate faces
+		//like what i saw in PhysX docs
+		//
 		/*(if (MoveAndCollide(_velocity * (float)delta) != null) :(
 		{
 			var collider = new KinematicCollision3D();
@@ -181,7 +150,9 @@ public partial class PlayerScript : CharacterBody3D
 		_primShootTimerCounter += delta;
 		_secondShootTimerCounter += delta;
 	}
-	//Weapon stuff
+	
+	
+	//Weapon Methods
 	private bool CanShoot(double timer, CanShootCheck mode)
 	{
 		if (mode == CanShootCheck.Primary)
@@ -189,23 +160,36 @@ public partial class PlayerScript : CharacterBody3D
 		else
 			return _secondShootTimerCounter > timer;
 	}
-
-	private void SwitchWeaponTo(Weapon3D weapon)
+	private void InitWeapons()
 	{
-		//var inactiveweapon = inactiveWeapon.GetChildOrNull<Weapon3D>(0);
-		//GD.Print(inactiveweapon);
-		_currentWeapon = _weaponSlot.GetChildOrNull<Weapon3D>(0);
-
-		//GD.Print(GetNode<Weapon3D>("InactiveWeapon/sword").GetInstanceId());
-		//GD.Print(inactiveweapon);
-		_weaponSlot.RemoveChild(_currentWeapon);
-		//_inactiveWeapons.RemoveChild(inactiveweapon);
-
-		//_currentWeaponSlot.AddChild(inactiveweapon);
-		_inactiveWeapons.AddChild(_currentWeapon);
-		_currentWeapon = _weaponSlot.GetChildOrNull<Weapon3D>(0);
+		for (int i = 0; i < _weaponSlot.GetChildCount(); i++)
+		{
+			var WeaponChild = _weaponSlot.GetChildOrNull<Weapon3D>(i);
+			_weapons.Add(WeaponChild);
+		}
+		//temporary hack, sets sword as current weapon when player loads in
+		SetWeapon(_weapons[0]);
 	}
-	//Movement methods
+
+	private void SetWeapon(Weapon3D weapon)
+	{
+		//iterates through stored weapons to set them as invisible, then sets current weapon as visible
+		for (int i = 0; i < _weapons.Count; i++)
+		{
+			_weapons[i].Visible = false;
+		}
+		_currentWeapon = weapon;
+		_currentWeapon.Visible = true;
+	}
+	
+	private void AddNewWeapon(Weapon3D newWeapon)
+	{
+		//currently unused
+		_weapons.Add(newWeapon);
+	}
+	
+	
+	//Movement Methods
 	void Accelerate(float accel, float moveSpeed)
 	{
 		//acceleration calculated based on desired speed and the dot product of current velocity and wishdir
