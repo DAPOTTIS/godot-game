@@ -1,7 +1,3 @@
-using Godot;
-using System;
-
-
 public partial class rocketlauncher : Weapon3D
 {
 	[Export] private float _projectileForce = 25f;

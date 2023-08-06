@@ -1,6 +1,3 @@
-using Godot;
-using System;
-
 public partial class Sword : Weapon3D
 {
 	private Node3D _weaponMesh;

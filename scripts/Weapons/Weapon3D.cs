@@ -1,5 +1,3 @@
-using System;
-using Godot;
 using Vector3 = Godot.Vector3;
 
 [GlobalClass]
