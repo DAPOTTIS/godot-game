@@ -1,6 +1,6 @@
-using System.Collections.Generic;
-using Godot;
-using Godot.Collections;
+global using Godot;
+global using System;
+global using System.Collections.Generic;
 
 namespace Anotherfailedattempt.scripts;
 
