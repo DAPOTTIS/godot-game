@@ -93,7 +93,7 @@ public partial class PlayerScript : CharacterBody3D
 		{
 			_currentWeapon.PrimaryFire();
 			_primShootTimerCounter = 0f;
-			_currentWeapon.FireSound.Play();
+			_currentWeapon.FireSound?.Play();
 		}
 		
 		if (@event.IsActionPressed("secondaryfire") && _currentWeapon.CurrentAmmo>0 && CanShoot(_currentWeapon.SecShootTimer,CanShootCheck.Secondary))
@@ -169,6 +169,7 @@ public partial class PlayerScript : CharacterBody3D
 			var weaponChild = _weaponSlot.GetChildOrNull<Weapon3D>(i);
 			_weapons.Add(weaponChild);
 		}
+		
 		//temporary hack, sets sword as current weapon when player loads in
 		
 		SetWeapon(_weapons[0]);
@@ -190,6 +191,7 @@ public partial class PlayerScript : CharacterBody3D
 	private void AddNewWeapon(Weapon3D newWeapon)
 	{
 		//currently unused
+		
 		_weapons.Add(newWeapon);
 	}
 	
@@ -198,6 +200,7 @@ public partial class PlayerScript : CharacterBody3D
 	void Accelerate(float accel, float moveSpeed)
 	{
 		//acceleration calculated based on desired speed and the dot product of current velocity and wishdir
+		
 		float wishSpeed = QNormalize(_wishDir) * moveSpeed;
 		float currentSpeed = _velocity.Dot(_wishDir);
 		
@@ -248,6 +251,7 @@ public partial class PlayerScript : CharacterBody3D
 	private void SetDir()
 	{
 		//setting the direction using input and camera/head rotation
+		
 		Vector2 inputDir = Input.GetVector("left", "right", "forward", "back");
 		_wishDir = (_head.GlobalTransform.Basis * new Vector3(inputDir.X, 0, inputDir.Y)).Normalized();
 	}
@@ -255,6 +259,7 @@ public partial class PlayerScript : CharacterBody3D
 	private float QNormalize(Vector3 inputVector)
 	{
 		//Quake's vector normalize function normalizes the vector and gets the magnitude, so this is replicating it
+		
 		inputVector = inputVector.Normalized();
 		var result = inputVector.Length();
 		return result;

@@ -37,7 +37,7 @@ public partial class Weapon3D : RigidBody3D
 	public override void _Ready()
 	{
 		OnReady();
-		FireSound = GetNode<AudioStreamPlayer>("FireSound");
+		FireSound = GetNodeOrNull<AudioStreamPlayer>("FireSound");
 	}
 
 	public virtual void OnReady()
