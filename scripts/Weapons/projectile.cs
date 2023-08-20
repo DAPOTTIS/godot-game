@@ -1,6 +1,3 @@
-using Godot;
-using System;
-
 public partial class projectile : RigidBody3D
 {
 	private void _on_timer_timeout()

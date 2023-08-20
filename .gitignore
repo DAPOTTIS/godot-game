@@ -2,3 +2,5 @@
 .godot/
 .idea/
 
+# Mono
+.vs/

@@ -1,6 +1,3 @@
-using Godot;
-using System;
-
 public partial class UserInterface : Control
 {
 	private CharacterBody3D _player;
