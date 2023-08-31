@@ -3,7 +3,7 @@ global using System;
 global using System.Collections.Generic;
 
 namespace Anotherfailedattempt.scripts;
-
+//@todo: make use of partial class to separate weapon logic and movement logic and whatever
 public partial class PlayerScript : CharacterBody3D
 {
 	private Vector3 _wishDir = Vector3.Zero;
@@ -108,7 +108,7 @@ public partial class PlayerScript : CharacterBody3D
 	private void Jump()
 	{
 		if (!IsOnFloor()) return;
-		_velocity.Y = _jumpVelocity;
+		_velocity.Y += _jumpVelocity;
 		_jumpSound.Play();
 	}
 
@@ -171,7 +171,6 @@ public partial class PlayerScript : CharacterBody3D
 		}
 		
 		//temporary hack, sets sword as current weapon when player loads in
-		
 		SetWeapon(_weapons[0]);
 	}
 
@@ -179,10 +178,8 @@ public partial class PlayerScript : CharacterBody3D
 	{
 		//iterates through stored weapons to set them as invisible, then sets current weapon as visible
 		
-		for (int i = 0; i < _weapons.Count; i++)
-		{
+		for (int i = 0; i < _weapons.Count; i++) 
 			_weapons[i].Visible = false;
-		}
 		
 		_currentWeapon = weapon;
 		_currentWeapon.Visible = true;

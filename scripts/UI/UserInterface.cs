@@ -6,6 +6,7 @@ public partial class UserInterface : Control
 	private Label _speedLabel;
 	private Weapon3D _rocketLauncher;
 	
+	
 	public override void _Ready()
 	{
 		_player = GetParent<CharacterBody3D>();
